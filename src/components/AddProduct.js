@@ -7,7 +7,6 @@ import { doc, setDoc } from "firebase/firestore";
 import { storage } from "../firebaseApp";
 
 
-
 export default class AddProduct extends Component {
     constructor(props){
         super(props);
@@ -25,14 +24,12 @@ export default class AddProduct extends Component {
         }
     }
    
-   handleUpload(){
-
-   }
+   
     
 
    handleUpload = () => {
     
-     storage.ref(`images/{this.state.file.name}`).put(this.state.file).then(function(snapshot) {
+     storage.ref('images/'+this.state.file.name).put(this.state.file).then(function(snapshot) {
 
             // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
             var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -92,7 +89,7 @@ export default class AddProduct extends Component {
 
         auth.onAuthStateChanged((user1)=>{
             if(user1){
-               user1 = auth.currentUser;
+              user1 = auth.currentUser;
               this.setState({email:user1.email});
               let db1=app.firestore();
               var docRef=db1.collection("users").doc(this.state.email);
