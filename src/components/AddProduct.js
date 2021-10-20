@@ -32,7 +32,7 @@ export default class AddProduct extends Component {
 
    handleUpload = () => {
     
-     storage.ref(`images/{this.state.file.name}`).put(this.state.file).then(function(snapshot) {
+     storage.ref('images/'+this.state.file.name).put(this.state.file).then(function(snapshot) {
 
             // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
             var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -210,11 +210,9 @@ export default class AddProduct extends Component {
             placeholder="How does your product look like?"
           /> <div id="progress"></div>
         </div>
-        <button className="btn btn-dark my-2" onClick={this.addData}>
-          Add product
-        </button>
+        
         <button className="btn btn-dark my-2" onClick={this.handleUpload}>
-          File upload
+          Add product
         </button>
       </div>
     </div>
