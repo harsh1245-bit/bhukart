@@ -6,7 +6,7 @@ import {
   
 } from "react-router-dom";
 import AddProduct from './components/AddProduct';
-import CreateProduct from './components/CreateProduct';
+
 import Home from './components/Home';
 import Login from './components/Login';
 import Marketplace from './components/Marketplace';

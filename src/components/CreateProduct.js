@@ -19,8 +19,8 @@ import NavLog from "./NavLog";
 export default function CreateProduct(props) {
   const [file, setfile] = useState(null);
   const [user, setuser] = useState("")
-  const [url, setUrl] = useState("");
-  const [progress, setProgress] = useState(0);
+  
+ 
   const [hostel,sethostel] = useState("");
   const [room,setroom] = useState("");
   const [phone,setphone] = useState("");
@@ -28,7 +28,7 @@ export default function CreateProduct(props) {
   let auth = app.auth();
   auth.onAuthStateChanged(function(user1){
     if(user1){
-      var user1 = auth.currentUser;
+      user1 = auth.currentUser;
       setuser(user1.email);
       let db1=app.firestore();
       var docRef=db1.collection("users").doc(user);
@@ -58,7 +58,7 @@ export default function CreateProduct(props) {
 
 
   const handleUpload = () => {
-    {/*const uploadTask =*/} storage.ref(`images/${file.name}`).put(file).then(function(snapshot) {
+   storage.ref(`images/${file.name}`).put(file).then(function(snapshot) {
 
             // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
             var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -80,31 +80,7 @@ export default function CreateProduct(props) {
             });
         });
     
-    {/*uploadTask.on(
-      "state_changed",
-      snapshot => {
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setProgress(progress);
-      },
-      error => {
-        console.log(error);
-      },
-      () => {
-        storage
-          .ref("images")
-          .child(file.name)
-          .getDownloadURL()
-          .then(url => {
-            setUrl(url);
-          });
-
-          addData(url);
-          alert('Data added successfully');
-
-      }
-    );*/}
+    
   };
 
   
@@ -113,15 +89,7 @@ export default function CreateProduct(props) {
     setfile(event.target.files[0]);
     console.log(event.target.files[0]);
   }
-  function uploadFile() {
-    const storage = getStorage();
-    let bucketName = "images";
-    let files = setfile;
-   const storageRef = ref(storage,`${bucketName}/${files.name}`);
-    uploadBytes(storageRef, files).then((snapshot) => {
-      console.log('Uploaded a blob or file!',snapshot.downloadURL);
-    });
-  }
+  
 
   async function addData(url) {
     let name = document.getElementById("name");
@@ -131,7 +99,7 @@ export default function CreateProduct(props) {
     let email = document.getElementById("email_");
 
     try {
-      {/*addDoc(collection(db, "marketplace")*/}
+      
       
       const docRef = await setDoc(doc(db, "marketplace", name.value+email.value), {
         name: name.value,
@@ -150,13 +118,7 @@ export default function CreateProduct(props) {
     }
   }
 
-  async function readData() {
-    const querySnapshot = await getDocs(collection(db, "marketplace"));
-    querySnapshot.forEach((doc) => {
-      console.log(`${doc.id} => ${doc.data().name}`);
-      console.log(`${doc.id} => ${doc.data().price}`);
-    });
-  }
+  
   return (
       <>
       <NavLog/>

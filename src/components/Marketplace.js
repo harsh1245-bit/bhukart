@@ -32,7 +32,7 @@ export default class marketplace extends Component {
             querySnapshot.forEach((item) => {
                 // doc.data() is never undefined for query doc snapshots
                 console.log(item.id, " => ", item.data());
-                let data = document.getElementById('list');
+                
                 
                 console.log(item.data().uid,this.state.user)
                 if(item.data().uid!==this.state.user){

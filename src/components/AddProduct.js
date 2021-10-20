@@ -2,12 +2,11 @@ import React, { Component } from 'react'
 import app from "../firebase";
 import NavLog from"./NavLog";
 import { getFirestore } from "firebase/firestore";
-import { collection } from "firebase/firestore";
-import { getDocs } from "firebase/firestore";
+
 import { doc, setDoc } from "firebase/firestore"; 
 import { storage } from "../firebaseApp";
 
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+
 
 export default class AddProduct extends Component {
     constructor(props){
@@ -60,7 +59,7 @@ export default class AddProduct extends Component {
   addData=()=> {
    
     try {
-      {/*addDoc(collection(db, "marketplace")*/}
+      
       const db = getFirestore();
       
       const docRef =  setDoc(doc(db, "marketplace", this.state.product+this.state.email), {
@@ -93,7 +92,7 @@ export default class AddProduct extends Component {
 
         auth.onAuthStateChanged((user1)=>{
             if(user1){
-              var user1 = auth.currentUser;
+               user1 = auth.currentUser;
               this.setState({email:user1.email});
               let db1=app.firestore();
               var docRef=db1.collection("users").doc(this.state.email);
