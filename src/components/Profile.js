@@ -49,7 +49,7 @@ export default class Profile extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="card">
                 <NavLog/>
                 <div className="jumbotron mx-4 my-4" id="profile">
                 <h1 className="display-4">Email: {this.state.email}</h1>

@@ -93,9 +93,9 @@ export default class Signup extends Component {
     render() {
         return (
             <>
-            <div id="signup_div">
+            <div id="signup_div" className="card">
                 <Nav/>
-                <div className="container my-4 card" style={{width:'60rem'}}>
+                <div className="container my-4 card">
                     <h1 className=" my-1">Create Profile</h1>
                     <hr />
                 <div className="input-group mb-3">
