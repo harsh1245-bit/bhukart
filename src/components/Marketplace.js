@@ -9,7 +9,8 @@ export default class marketplace extends Component {
             productList:[],
             user:"",
             productID:[],
-            id:""
+            id:"",
+            loading:true
         }
     }
     buyProduct=(i)=>{
@@ -51,15 +52,21 @@ export default class marketplace extends Component {
                 if(item.data().uid!==this.state.user && !item.data().buy){
                     products.push(item.data());
                     productIDs.push(item.id);
-                    document.getElementById('hide').style.display="none";
+                    
                     
                 }
                 console.log(products);
             });
             this.setState({
                 productList:products,
-                productID:productIDs
+                productID:productIDs,
+                loading:false
             })
+            if(products.length>0){
+                document.getElementById('hide').style.display="none";
+
+            }
+            
         })
         .catch((error) => {
             console.log("Error getting documents: ", error);
@@ -70,13 +77,14 @@ export default class marketplace extends Component {
         return (
             <div>
                 <NavLog/>
-                <h3 className="my-3 mx-4">All Products</h3>
+                <h3 className="my-3 mx-4">All products</h3>
                 <hr />
                 <div className='row'id="list">
                     
-                    <h1 className="my-4 mx-4" id="hide">Sorry, There are no products to buy.</h1>
-                    
-                {this.state.productList.map((element,index)=>{
+                   
+                    {this.state.loading?<><div className="container"><h1 className="text-center">Loading...</h1></div></>:<>
+                    <h1 className="text-center" id="hide">Oops, There are products available.</h1>
+                    {this.state.productList.map((element,index)=>{
                 return <div className="col md-3" key={element.url}>
                     <div className="col md-4 mx-2 my-2" >
             
@@ -87,15 +95,16 @@ export default class marketplace extends Component {
                         <p className="card-text">{element.description}</p>
                         <button href="/" className="btn btn-dark my-1 ">{element.price}</button>
                         <button href="/" className="btn btn-dark my-1 mx-2" id={index} onClick={this.buyProduct}>Buy</button>
-                        <p className="card-text"><small className="text-muted">Hostel: {element.hostel}</small></p>
-                        <p className="card-text"><small className="text-muted">Room No.: {element.room}</small></p>
+                        
                     </div>
                     </div>
                 </div>
                 
                 </div>
                 
-                })}
+                })}</>}
+                    
+                
                     
                     </div>
             </div>

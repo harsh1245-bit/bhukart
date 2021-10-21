@@ -9,7 +9,8 @@ export default class BoughtProducts extends Component {
             productList:[],
             user:"",
             productID:[],
-            id:""
+            id:"",
+            loading:true
         }
     }
     
@@ -38,15 +39,20 @@ export default class BoughtProducts extends Component {
                 if(item.data().bought===this.state.user && item.data().buy){
                     products.push(item.data());
                     productIDs.push(item.id);
-                    document.getElementById('hide').style.display="none";
+                   
                     
                 }
                 console.log(products);
             });
             this.setState({
                 productList:products,
-                productID:productIDs
+                productID:productIDs,
+                loading:false
             })
+            if(products.length>0){
+                document.getElementById('hide').style.display="none";
+
+            }
         })
         .catch((error) => {
             console.log("Error getting documents: ", error);
@@ -57,13 +63,14 @@ export default class BoughtProducts extends Component {
         return (
             <div>
                 <NavLog/>
-                <h3 className="my-3 mx-4">All Products</h3>
+                <h3 className="my-3 mx-4">Your orders</h3>
                 <hr />
                 <div className='row'id="list">
                     
-                    <h1 className="my-4 mx-4" id="hide">Sorry, There are no products to buy.</h1>
-                    
-                {this.state.productList.map((element,index)=>{
+                   
+                    {this.state.loading?<><div className="container"><h1 className="text-center">Loading...</h1></div></>:<>
+                    <h1 className="text-center" id="hide">Oops, you haven't bought anything.</h1>
+                    {this.state.productList.map((element,index)=>{
                 return <div className="col md-3" key={element.url}>
                     <div className="col md-4 mx-2 my-2" >
             
@@ -82,7 +89,9 @@ export default class BoughtProducts extends Component {
                 
                 </div>
                 
-                })}
+                })}</>}
+                    
+                
                     
                     </div>
             </div>

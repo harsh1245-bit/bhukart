@@ -10,7 +10,8 @@ export default class SoldProducts extends Component {
             productList:[],
             user:"",
             productID:[],
-            id:""
+            id:"",
+            loading: true
         }
     }
     
@@ -39,15 +40,21 @@ export default class SoldProducts extends Component {
                 if(item.data().uid===this.state.user && item.data().buy){
                     products.push(item.data());
                     productIDs.push(item.id);
-                    document.getElementById('hide').style.display="none";
+                    
                     
                 }
                 console.log(products);
             });
             this.setState({
                 productList:products,
-                productID:productIDs
+                productID:productIDs,
+                loading:false
             })
+            if(products.length>0){
+                document.getElementById('hide').style.display="none";
+
+            }
+
         })
         .catch((error) => {
             console.log("Error getting documents: ", error);
@@ -57,36 +64,39 @@ export default class SoldProducts extends Component {
     render() {
         return (
             <div>
-                <NavLog/>
-                <h3 className="my-3 mx-4">All Products</h3>
-                <hr />
-                <div className='row'id="list">
-                    
-                    <h1 className="my-4 mx-4" id="hide">Sorry, Either you have not uploaded any products or they have not been bought yet.</h1>
-                    
+            <NavLog/>
+            <h3 className="my-3 mx-4">Sold products</h3>
+            <hr />
+            <div className='row'id="list">
+                
+               
+                {this.state.loading?<><div className="container"><h1 className="text-center">Loading...</h1></div></>:<>
+                <h1 className="text-center" id="hide">Oops, you have not sold any poducts.</h1>
                 {this.state.productList.map((element,index)=>{
-                return <div className="col md-3" key={element.url}>
-                    <div className="col md-4 mx-2 my-2" >
-            
-                    <div className="card" style={{width: "18rem"}}>
-                    <img src={element.imgUrl} className="card-img-top" alt="Harsh"/>
-                    <div className="card-body">
-                        <h5 className="card-title">{element.name}</h5>
-                        <p className="card-text">{element.description}</p>
-                        <button href="/" className="btn btn-dark my-1 ">{element.price}</button>
-                        <button href="/" className="btn btn-dark my-1 mx-2" id={index} onClick={this.buyProduct}>{element.phone}</button>
-                        <p className="card-text"><small className="text-muted">Hostel: {element.hostel}</small></p>
-                        <p className="card-text"><small className="text-muted">Room No.: {element.room}</small></p>
-                    </div>
-                    </div>
+            return <div className="col md-3" key={element.url}>
+                <div className="col md-4 mx-2 my-2" >
+        
+                <div className="card" style={{width: "18rem"}}>
+                <img src={element.imgUrl} className="card-img-top" alt="Harsh"/>
+                <div className="card-body">
+                    <h5 className="card-title">{element.name}</h5>
+                    <p className="card-text">{element.description}</p>
+                    <button href="/" className="btn btn-dark my-1 ">{element.price}</button>
+                    <button href="/" className="btn btn-dark my-1 mx-2" id={index} onClick={this.buyProduct}>{element.phone}</button>
+                    <p className="card-text"><small className="text-muted">Hostel: {element.hostel}</small></p>
+                    <p className="card-text"><small className="text-muted">Room No.: {element.room}</small></p>
                 </div>
-                
                 </div>
-                
-                })}
-                    
-                    </div>
             </div>
+            
+            </div>
+            
+            })}</>}
+                
+            
+                
+                </div>
+        </div>
         )
     }
 }

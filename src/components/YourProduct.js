@@ -94,6 +94,8 @@ export default class YourProduct extends Component {
         return (
             <div>
                 <NavLog/>
+                <h3 className="my-3 mx-4">Your products</h3>
+                <hr />
                 <div className='row'id="list">
                     
                     <h1 className="my-4 mx-4" id="hide">Sorry, You haven't uploaded any products yet.</h1>
