@@ -207,11 +207,9 @@ export default class AddProduct extends Component {
             placeholder="How does your product look like?"
           /> <div id="progress"></div>
         </div>
-        <button className="btn btn-dark my-2" onClick={this.addData}>
-          Add product
-        </button>
+        
         <button className="btn btn-dark my-2" onClick={this.handleUpload}>
-          File upload
+          Add product
         </button>
       </div>
     </div>
