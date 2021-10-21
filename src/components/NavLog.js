@@ -40,7 +40,17 @@ export default class NavLog extends Component {
                         <li className="nav-item active">
                             <Link className="nav-link" to="/addproduct">Add Product</Link>
                         </li>
-                        
+                        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Others
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <Link class="dropdown-item" to="/cart">Cart</Link>
+          <Link class="dropdown-item" to="/sold">Sold products</Link>
+          
+          
+        </div>
+      </li>
                         
                         
                         </ul>

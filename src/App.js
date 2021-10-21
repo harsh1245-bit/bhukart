@@ -15,6 +15,8 @@ import Signup from './components/Signup';
 import YourProduct from './components/YourProduct';
 import EditProfile from './components/EditProfile';
 import Forgotpassword from './components/Forgotpassword';
+import BoughtProducts from './components/BoughtProducts';
+import SoldProducts from './components/SoldProducts';
 export default class App extends Component {
   render() {
     return (
@@ -51,6 +53,12 @@ export default class App extends Component {
           </Route>
           <Route path="/forget">
           <Forgotpassword/>
+          </Route>
+          <Route path="/cart">
+          <BoughtProducts/>
+          </Route>
+          <Route path="/sold">
+          <SoldProducts/>
           </Route>
           
         </Switch>

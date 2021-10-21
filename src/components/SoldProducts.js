@@ -1,8 +1,9 @@
+
 import React, { Component } from 'react'
 import app from "../firebase";
 import NavLog from './NavLog';
 
-export default class marketplace extends Component {
+export default class SoldProducts extends Component {
     constructor(props){
         super(props);
         this.state={
@@ -12,20 +13,7 @@ export default class marketplace extends Component {
             id:""
         }
     }
-    buyProduct=(i)=>{
-        let index= i.target.id;
-        alert('working',i.target.id);
-        console.log("haan",i.target.id);
-        const db=app.firestore();
-        
-        
-        
-        db.collection("marketplace").doc(this.state.productID[index]).update({
-            bought:this.state.user, buy:true
-          });
-        
-        this.componentDidMount();
-    }
+    
     componentDidMount(){
         let auth = app.auth();
         
@@ -48,7 +36,7 @@ export default class marketplace extends Component {
                 
                 
                 console.log(item.data().uid,this.state.user)
-                if(item.data().uid!==this.state.user && !item.data().buy){
+                if(item.data().uid===this.state.user && item.data().buy){
                     products.push(item.data());
                     productIDs.push(item.id);
                     document.getElementById('hide').style.display="none";
@@ -74,7 +62,7 @@ export default class marketplace extends Component {
                 <hr />
                 <div className='row'id="list">
                     
-                    <h1 className="my-4 mx-4" id="hide">Sorry, There are no products to buy.</h1>
+                    <h1 className="my-4 mx-4" id="hide">Sorry, Either you have not uploaded any products or they have not been bought yet.</h1>
                     
                 {this.state.productList.map((element,index)=>{
                 return <div className="col md-3" key={element.url}>
@@ -86,7 +74,7 @@ export default class marketplace extends Component {
                         <h5 className="card-title">{element.name}</h5>
                         <p className="card-text">{element.description}</p>
                         <button href="/" className="btn btn-dark my-1 ">{element.price}</button>
-                        <button href="/" className="btn btn-dark my-1 mx-2" id={index} onClick={this.buyProduct}>Buy</button>
+                        <button href="/" className="btn btn-dark my-1 mx-2" id={index} onClick={this.buyProduct}>{element.phone}</button>
                         <p className="card-text"><small className="text-muted">Hostel: {element.hostel}</small></p>
                         <p className="card-text"><small className="text-muted">Room No.: {element.room}</small></p>
                     </div>
