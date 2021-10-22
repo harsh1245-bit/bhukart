@@ -4,13 +4,16 @@ import Nav from './Nav'
 import app from "../firebase";
 import NavLog from './NavLog';
 import Welcome from './Welcome';
+import Footer from './Footer';
+
 
 
 export default class Home extends Component {
   constructor(props){
     super(props);
     this.state={
-      user:false
+      user:false,
+      loading:true
     }
   }
 
@@ -19,7 +22,7 @@ export default class Home extends Component {
         auth.onAuthStateChanged( (user)=> {
             if (user) {
               // User is signed in.
-      
+              this.setState({loading:false})
               document.getElementById("loggedin").style.display = "block";
               document.getElementById("loggedout").style.display = "none";
       
@@ -49,15 +52,19 @@ export default class Home extends Component {
         return (
             <div>
               {!this.state.user?<Nav/>:<NavLog/>}
+              {this.state.loading?<><h1>Loading...</h1></>:<>
                 <div id="loggedout">
-                    
                     <Login/>
                 </div>
                 <div id="loggedin">
                     
                     <Welcome/>
+                    <Footer/>
 
-                </div>
+                    
+
+                </div></>}
+               
                 
             </div>
         )

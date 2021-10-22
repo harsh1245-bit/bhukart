@@ -18,13 +18,14 @@ export default class Welcome extends Component {
 
           
          var first_name= email_id.split('.')[0];
+         var last_name= email_id.split('.')[1];
           document.getElementById("greet").innerHTML =
             `<div class="jumbotron mx-4 my-4">
-            <h1 class="display-4">Hello,${email_id},${first_name}</h1>
-            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+            <h1 class="display-4">Hello,${first_name} ${last_name}</h1>
+            <p class="lead">Welcome to BHUkart, now you don't need to roam around hostels for something you need eagerly.</p>
             <hr class="my-4">
-            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+            <p>Either you wanna sell something, or buy anything; BHUkart is there for you.</p>
+            <a class="btn btn-secondary btn-lg" href="#" role="button">Happy shopping :)</a>
           </div><hr class='my-3'/>`;
           
         }

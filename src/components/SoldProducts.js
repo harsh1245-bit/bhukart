@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
 import app from "../firebase";
+import Buy from './Buy';
 import NavLog from './NavLog';
 
 export default class SoldProducts extends Component {
@@ -13,6 +14,9 @@ export default class SoldProducts extends Component {
             id:"",
             loading: true
         }
+    }
+    info=()=>{
+        alert("working");
     }
     
     componentDidMount(){
@@ -67,31 +71,38 @@ export default class SoldProducts extends Component {
             <NavLog/>
             <h3 className="my-3 mx-4">Sold products</h3>
             <hr />
-            <div className='row'id="list">
-                
-               
+            <div className="container">
+            <table class="table table-borderless table-dark">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Buyer's Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                        
                 {this.state.loading?<><div className="container"><h1 className="text-center">Loading...</h1></div></>:<>
                 <h1 className="text-center" id="hide">Oops, you have not sold any poducts.</h1>
                 {this.state.productList.map((element,index)=>{
-            return <div className="col md-3" key={element.url}>
-                <div className="col md-4 mx-2 my-2" >
-        
-                <div className="card" style={{width: "18rem"}}>
-                <img src={element.imgUrl} className="card-img-top" alt="Harsh"/>
-                <div className="card-body">
-                    <h5 className="card-title">{element.name}</h5>
-                    <p className="card-text">{element.description}</p>
-                    <button href="/" className="btn btn-dark my-1 ">{element.price}</button>
-                    <button href="/" className="btn btn-dark my-1 mx-2" id={index} onClick={this.buyProduct}>{element.phone}</button>
-                    <p className="card-text"><small className="text-muted">Hostel: {element.hostel}</small></p>
-                    <p className="card-text"><small className="text-muted">Room No.: {element.room}</small></p>
-                </div>
-                </div>
-            </div>
+            return <tr> <th scope="row">{index+1}</th>
+            <td>{element.name}</td>
+            <td>{element.price}</td>
+            <td>Email: {element.bought}<Buy email={element.bought}/></td>
             
-            </div>
-            
+            </tr>
             })}</>}
+                   
+                    
+                </tbody>
+                </table>
+                </div>
+            <div className='row'id="list">
+                
+               
+               
                 
             
                 
