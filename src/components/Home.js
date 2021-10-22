@@ -4,7 +4,7 @@ import Nav from './Nav'
 import app from "../firebase";
 import NavLog from './NavLog';
 import Welcome from './Welcome';
-import Footer from './Footer';
+
 
 
 
@@ -39,7 +39,7 @@ export default class Home extends Component {
               }
             } else {
               // No user is signed in.
-      
+              this.setState({loading:false})
               document.getElementById("loggedin").style.display = "none";
               document.getElementById("loggedout").style.display = "block";
               this.setState({user:false})
@@ -59,7 +59,7 @@ export default class Home extends Component {
                 <div id="loggedin">
                     
                     <Welcome/>
-                    <Footer/>
+                    
 
                     
 
